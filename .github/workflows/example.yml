@@ -14,3 +14,12 @@ jobs:
             const title = await page.$eval('title', el => el.textContent);
             return title;
       - run: echo '${{ steps.get-title.outputs.result }}'
+      - id: get-body
+        uses: maku693/action-puppeteer-script@v0
+        with:
+          script: |
+            const page = await browser.newPage();
+            await page.goto('https://example.com');
+            const title = await page.$eval('body', el => el.textContent.trim());
+            return title;
+      - run: echo '${{ steps.get-body.outputs.result }}'
